@@ -14,3 +14,17 @@ func BinString2Bits(s string) []byte {
 	}
 	return result
 }
+
+func BinBits2String(b []byte) string {
+	result := ""
+	for i := 0; i < len(b); i++ {
+		for j := 7; j >= 0; j-- {
+			if b[i]&(1<<uint(j)) != 0 {
+				result += "1"
+			} else {
+				result += "0"
+			}
+		}
+	}
+	return result
+}
