@@ -2,8 +2,7 @@ package strbit
 
 import "fmt"
 
-func HexString2Bits(s string) []byte {
-	result := []byte{}
+func HexString2Bits(s string, r []byte) {
 	f := true
 	i := 0
 	for _, c := range s {
@@ -15,17 +14,18 @@ func HexString2Bits(s string) []byte {
 			x -= 'a' - 10
 		case 'A' <= c && c <= 'F':
 			x -= 'A' - 10
+		default:
+			panic("HaxString2Bits: invalid hex char")
 		}
 		if f {
-			result = append(result, x<<4)
+			r[i] |= x << 4
 			f = false
 		} else {
-			result[i] |= x
+			r[i] |= x
 			i++
 			f = true
 		}
 	}
-	return result
 }
 
 func HexBits2String(bits []byte) string {
